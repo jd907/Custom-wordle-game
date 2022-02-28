@@ -1,0 +1,11 @@
+/.vscode
+/__pycache__
+/hinter.py
+/testbed.py
+/venv
+data/*.json
+data/*.txt
+data/nltk_data
+data/__pycache__
+data/words
+/prod

@@ -1,0 +1,35 @@
+paths:
+  data: data
+  words: words
+  wgd: wgd
+  source: source
+
+files:
+  popular_word_list: "top_list.json"
+  dictionary_word_list: "dictionary_list.json"
+  dictionary_download_list: "dictionary_list.txt"
+  other_word_list: "other_list.json"
+  wgd_word_list: "wdg_list.json"
+  wgd_english_txt: "wgd_english.txt"
+  wgd_english: "wdg_english_list.json"
+  wgd_twl_txt: "wdg_twl.txt"
+  wgd_twl: "wdg_twl_list.json"
+  wgd_compound_tmp: "wgd_compound"
+  wgd_compound: "wgd_compound_list.json"
+  wgd_sowpods_txt: "wgd_sowpods.txt"
+  wgd_sowpods: "wgd_sowpods_list.json"
+
+params:
+  word_length: 5
+  max_attempts: 6
+  top_word_size: 30000
+  language: "en"
+  seed_max: 9999
+
+urls:
+  dict_list: "https://phillipmfeldman.org/English/large.txt"
+  wgd_english: "https://www.wordgamedictionary.com/english-word-list/download/english.txt"
+  wgd_twl: "https://www.wordgamedictionary.com/twl06/download/twl06.txt"
+  wgd_compound: "https://www.wordgamedictionary.com/compound-words/get.php"
+  wgd_sowpods: "https://www.wordgamedictionary.com/sowpods/download/sowpods.txt"
+  wgd_length: "https://www.wordgamedictionary.com/word-lists/"
