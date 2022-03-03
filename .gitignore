@@ -9,4 +9,4 @@ data/nltk_data
 data/__pycache__
 data/words
 /prod
-/data/stratch.py
+data/stratch.py
