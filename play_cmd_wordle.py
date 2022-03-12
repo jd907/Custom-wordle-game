@@ -15,7 +15,7 @@ CORRECT = Style.BRIGHT + Fore.GREEN
 ALMOST = Style.BRIGHT + Fore.YELLOW
 WRONG = Style.BRIGHT + Fore.BLACK
 NOT_GUESSED = Style.NORMAL
-BASE = string.digits + string.ascii_lowercase
+BASE = string.digits + string.ascii_lowercase + string.ascii_uppercase
 
 
 def main(word_length: int, max_attempts: int, seed: str, secret_word: str) -> str:
@@ -56,9 +56,9 @@ def main(word_length: int, max_attempts: int, seed: str, secret_word: str) -> st
 
     commands = 'play_cmd_wordle.py '
     commands += f'-s {encode_num(seed_int)} ' if secret_word is None else f'-w {secret_word} '
-    if word_length != 5:
+    if word_length != cfg.params.word_length:
         commands += f'-l {word_length}'
-    if max_attempts != 6:
+    if max_attempts != cfg.params.max_attempts:
         commands += f'-a {max_attempts}'
 
     print(commands)
@@ -173,8 +173,8 @@ def decode_num(seed: str) -> int:
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('-l', '--word_length', type=int, default=5)
-    parser.add_argument('-a', '--attempts', type=int, default=6)
+    parser.add_argument('-l', '--word_length', type=int, default=cfg.params.word_length)
+    parser.add_argument('-a', '--attempts', type=int, default=cfg.params.max_attempts)
     parser.add_argument('-s', '--seed', type=str, default=None)
     parser.add_argument('-w', '--secret_word', type=str, default=None)
     args = parser.parse_args()

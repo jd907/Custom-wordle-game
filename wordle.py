@@ -11,7 +11,7 @@ class LettersResult:
 
 class Wordle:
 
-    def __init__(self, secret_word: str, word_length: int = 5, max_attempts: int = 6):
+    def __init__(self, secret_word: str, word_length: int, max_attempts: int):
         self.secret_word: str = secret_word.upper()
         self.word_length = word_length
         self.max_attempts = max_attempts
