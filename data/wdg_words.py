@@ -1,8 +1,10 @@
-import os, requests, json
+import json
+import os
+from pathlib import Path
 
+import requests
 from config import load_config
 from tqdm import tqdm
-
 from utils import process_words
 
 cfg = load_config()
@@ -19,15 +21,18 @@ def download_length_lists() -> None:
 
 
 def download_single_list(url: str) -> None:
-    file_path = os.path.join(WORKING_DIR, cfg.paths.source, url.split('/')[-1])
+    file_path = Path(WORKING_DIR, cfg.paths.source, url.split('/')[-1])
 
-    if os.path.exists(file_path):
+    if file_path.exists():
         return
+
+    # Create the directory if it doesn't exist
+    file_path.parent.mkdir(parents=True, exist_ok=True)
 
     r = requests.get(url)
     print(f'Downloading {file_path}')
 
-    with open(file_path, 'w') as f:
+    with file_path.open('w') as f:
         json.dump(r.json(), f)
 
 

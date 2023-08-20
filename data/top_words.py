@@ -1,5 +1,6 @@
 import os
 from json import dump, load
+from pathlib import Path
 
 import wordfreq
 from colorama import Fore, Style
@@ -16,7 +17,7 @@ def update_top_words():
     # remove all words containing numbers or special characters
     top_list = [word for word in top_list if word.isalpha()]
 
-    print(f'{Fore.YELLOW}Removing words less than 4 and longer than 15' + Style.RESET_ALL)
+    print(f'{Fore.YELLOW}Removing words less than 4 and longer than 15{Style.RESET_ALL}')
 
     # remove all words with length less than 4 and longer than 15
     top_list = [word for word in top_list if len(word) >= 4 and len(word) <= 15]
@@ -34,10 +35,28 @@ def update_top_words():
     with open(os.path.join(cfg.paths.data, cfg.paths.words, cfg.files.other_word_list), 'r') as f:
         other_list = load(f)
 
-    #if word is not in other list, remove it
+    # if word is not in other list, remove it
+    removed_words = {}
     for key in top_list:
-        top_list[key] = [word for word in top_list[key] if word in other_list[str(key)]]
-        print(print_diff(key, before_len[key], len(top_list[key])))
+        before_len = len(top_list[key])
+        remaining_words, words_to_remove = [], []
+
+        other_set = set(other_list[str(key)])
+
+        for word in top_list[key]:
+            if word in other_set:
+                remaining_words.append(word)
+            else:
+                words_to_remove.append(word)
+
+        top_list[key] = remaining_words
+        removed_words[key] = words_to_remove
+
+        print(print_diff(key, before_len, len(top_list[key])))
+
+    file_path = Path(cfg.paths.data, 'removed_words.json')
+    with file_path.open('w') as f:
+        dump(removed_words, f)
 
     after_len, after_total = get_length(top_list)
     print_diff('Total', before_total, after_total)

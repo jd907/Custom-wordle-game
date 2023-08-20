@@ -4,6 +4,7 @@ import random
 import string
 from json import load
 
+import readchar
 from colorama import Fore, Style
 
 from data.config import load_config
@@ -183,6 +184,7 @@ if __name__ == '__main__':
                       max_attempts=args.attempts,
                       seed=args.seed,
                       secret_word=args.secret_word)
-        choice = input("[Enter] to play again, [Q] to quit: ")
+        print("[Enter] to play again, [Q] to quit: ")
+        choice = readchar.readchar()
         if choice in ['Q', 'q']:
             break
